@@ -217,10 +217,15 @@
     <Compile Include="Migrations\201901041252083_Profile.Designer.cs">
       <DependentUpon>201901041252083_Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901041312270_Posts.cs" />
+    <Compile Include="Migrations\201901041312270_Posts.Designer.cs">
+      <DependentUpon>201901041312270_Posts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -315,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901041252083_Profile.resx">
       <DependentUpon>201901041252083_Profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901041312270_Posts.resx">
+      <DependentUpon>201901041312270_Posts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
