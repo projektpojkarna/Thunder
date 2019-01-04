@@ -25,20 +25,8 @@
             <b>@ViewBag.Name</b> - @ViewBag.Age år<br />
 
             <button data-toggle="collapse" data-target="#demo">
-                Vänner <span class="badge">@Model.Friends.Count</span>
+                Vänner <span class="badge">0</span>
             </button>
-            <div id="demo" class="collapse">
-                <ul>
-                    @foreach (var f in Model.Friends)
-                    {
-                        var name = string.Concat(f.FirstName, " ", f.LastName);
-                    <li>
-                        @Html.ActionLink(name, "UserProfile", "User", f);
-                    </li>
-                    }
-                </ul>
-
-            </div>
             <br />
             <b>Intressen: </b>
             <ul>
