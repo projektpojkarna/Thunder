@@ -32,5 +32,11 @@ namespace Thunder.Controllers
             var user = GetCurrentUser();
             return View();
         }
+
+        public ActionResult EditUser()
+        {
+            var user = GetCurrentUser();
+            return View(user.Id);
+        }
     }
 }
