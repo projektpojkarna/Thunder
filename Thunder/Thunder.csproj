@@ -201,25 +201,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901041213363_FirstName.cs" />
-    <Compile Include="Migrations\201901041213363_FirstName.Designer.cs">
-      <DependentUpon>201901041213363_FirstName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041215352_LastName.cs" />
-    <Compile Include="Migrations\201901041215352_LastName.Designer.cs">
-      <DependentUpon>201901041215352_LastName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041237493_Interests.cs" />
-    <Compile Include="Migrations\201901041237493_Interests.Designer.cs">
-      <DependentUpon>201901041237493_Interests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041252083_Profile.cs" />
-    <Compile Include="Migrations\201901041252083_Profile.Designer.cs">
-      <DependentUpon>201901041252083_Profile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041312270_Posts.cs" />
-    <Compile Include="Migrations\201901041312270_Posts.Designer.cs">
-      <DependentUpon>201901041312270_Posts.cs</DependentUpon>
+    <Compile Include="Migrations\201901041342246_sync.cs" />
+    <Compile Include="Migrations\201901041342246_sync.Designer.cs">
+      <DependentUpon>201901041342246_sync.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -290,10 +274,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\User\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -309,20 +293,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901041213363_FirstName.resx">
-      <DependentUpon>201901041213363_FirstName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041215352_LastName.resx">
-      <DependentUpon>201901041215352_LastName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041237493_Interests.resx">
-      <DependentUpon>201901041237493_Interests.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041252083_Profile.resx">
-      <DependentUpon>201901041252083_Profile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041312270_Posts.resx">
-      <DependentUpon>201901041312270_Posts.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901041342246_sync.resx">
+      <DependentUpon>201901041342246_sync.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,13 +7,13 @@ namespace Thunder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class LastName : IMigrationMetadata
+    public sealed partial class sync : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(LastName));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(sync));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901041215352_LastName"; }
+            get { return "201901041342246_sync"; }
         }
         
         string IMigrationMetadata.Source
