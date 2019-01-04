@@ -206,6 +206,15 @@
     <Compile Include="Migrations\201901041447017_m.Designer.cs">
       <DependentUpon>201901041447017_m.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901041504260_lsbf.cs" />
+    <Compile Include="Migrations\201901041509575_sdjn.cs" />
+    <Compile Include="Migrations\201901041509575_sdjn.Designer.cs">
+      <DependentUpon>201901041509575_sdjn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901041524538_sdfg.cs" />
+    <Compile Include="Migrations\201901041524538_sdfg.Designer.cs">
+      <DependentUpon>201901041524538_sdfg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -298,6 +307,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201901041447017_m.resx">
       <DependentUpon>201901041447017_m.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901041509575_sdjn.resx">
+      <DependentUpon>201901041509575_sdjn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901041524538_sdfg.resx">
+      <DependentUpon>201901041524538_sdfg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
