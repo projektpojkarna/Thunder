@@ -9,7 +9,7 @@ using Thunder.Models;
 
 namespace Thunder.Controllers
 {
-
+    [Authorize] //Alla vyer i denna kontroller kräver inlogg
     public class UserController : Controller
     {
         private ApplicationUser GetCurrentUser()
@@ -29,8 +29,22 @@ namespace Thunder.Controllers
 
         public ActionResult UserProfile()
         {
+            var u = GetCurrentUser();
+            var p = u.Profile;
+            return View(new ProfileViewModel() {
+                Name = string.Concat(u.FirstName, " ", u.LastName),
+                Location = p.Location,
+                Occupation = p.Occupation,
+                Interests = p.Interests,
+                Presentation = p.Presentation,
+                ImgPath = p.ImgPath
+            });
+        }
+
+        public ActionResult EditUser()
+        {
             var user = GetCurrentUser();
-            return View();
+            return View(user.Id);
         }
     }
 }

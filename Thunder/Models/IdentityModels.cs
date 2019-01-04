@@ -38,5 +38,7 @@ namespace Thunder.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Thunder.Models.Profile> Profiles { get; set; }
     }
 }
