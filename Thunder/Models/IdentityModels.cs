@@ -11,6 +11,7 @@ namespace Thunder.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Profile Profile { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
