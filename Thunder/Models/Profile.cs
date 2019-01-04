@@ -18,11 +18,4 @@ namespace Thunder.Models
         public string Occupation { get; set; }
         public string ImgPath { get; set; }
     }
-
-    public class ProfileDbContext: DbContext
-    {
-        public DbSet<Profile> Profiles { get; set; }
-
-        public ProfileDbContext() : base("Profiles") { }
-    }
 }
