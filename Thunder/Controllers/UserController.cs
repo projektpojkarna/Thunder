@@ -31,6 +31,10 @@ namespace Thunder.Controllers
         {
             var u = GetCurrentUser();
             var p = u.Profile;
+            if(p == null)
+            {
+                p = new Profile();
+            }
             return View(new ProfileViewModel() {
                 Name = string.Concat(u.FirstName, " ", u.LastName),
                 Location = p.Location,
