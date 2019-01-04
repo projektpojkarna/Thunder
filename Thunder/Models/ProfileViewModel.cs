@@ -7,6 +7,7 @@ namespace Thunder.Models
 {
     public class ProfileViewModel
     {
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Presentation { get; set; }
         public string Occupation { get; set; }
