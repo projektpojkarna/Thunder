@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,28 @@ using Thunder.Models;
 
 namespace Thunder.Controllers
 {
+
     public class UserController : Controller
     {
-        private ApplicationDbContext dbo = new ApplicationDbContext();
-        // GET: User
-        public ActionResult EditUser()
+        private ApplicationUser GetCurrentUser()
         {
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            return View(dbo.Users.Find(userId));
+            var userId = User.Identity.GetUserId();
+            var manager =
+                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var user = manager.FindById(userId);
+            return user;
+        }
+
+        // GET: User
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult UserProfile()
+        {
+            var user = GetCurrentUser();
+            return View();
         }
     }
 }
