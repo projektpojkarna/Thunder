@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201901041312270_Posts.Designer.cs">
       <DependentUpon>201901041312270_Posts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901041327102_BirthDate.cs" />
+    <Compile Include="Migrations\201901041327102_BirthDate.Designer.cs">
+      <DependentUpon>201901041327102_BirthDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -290,10 +294,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -323,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901041312270_Posts.resx">
       <DependentUpon>201901041312270_Posts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901041327102_BirthDate.resx">
+      <DependentUpon>201901041327102_BirthDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
