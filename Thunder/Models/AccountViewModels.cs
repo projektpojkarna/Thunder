@@ -64,6 +64,14 @@ namespace Thunder.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "First Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "First name required")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Last name required")]
+        public string LastName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -80,13 +88,6 @@ namespace Thunder.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "First Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "First name required")]
-        public string FirstName { get; set; }
-
-        [Display(Name = "Last Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Last name required")]
-        public string LastName { get; set; }
     }
 
     public class ResetPasswordViewModel
