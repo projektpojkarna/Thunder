@@ -201,29 +201,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901041213363_FirstName.cs" />
-    <Compile Include="Migrations\201901041213363_FirstName.Designer.cs">
-      <DependentUpon>201901041213363_FirstName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041215352_LastName.cs" />
-    <Compile Include="Migrations\201901041215352_LastName.Designer.cs">
-      <DependentUpon>201901041215352_LastName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041237493_Interests.cs" />
-    <Compile Include="Migrations\201901041237493_Interests.Designer.cs">
-      <DependentUpon>201901041237493_Interests.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041252083_Profile.cs" />
-    <Compile Include="Migrations\201901041252083_Profile.Designer.cs">
-      <DependentUpon>201901041252083_Profile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041312270_Posts.cs" />
-    <Compile Include="Migrations\201901041312270_Posts.Designer.cs">
-      <DependentUpon>201901041312270_Posts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041327102_BirthDate.cs" />
-    <Compile Include="Migrations\201901041327102_BirthDate.Designer.cs">
-      <DependentUpon>201901041327102_BirthDate.cs</DependentUpon>
+    <Compile Include="Helpers\DbHelper.cs" />
+    <Compile Include="Migrations\201901041415185_Profile.cs" />
+    <Compile Include="Migrations\201901041415185_Profile.Designer.cs">
+      <DependentUpon>201901041415185_Profile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,23 +294,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901041213363_FirstName.resx">
-      <DependentUpon>201901041213363_FirstName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041215352_LastName.resx">
-      <DependentUpon>201901041215352_LastName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041237493_Interests.resx">
-      <DependentUpon>201901041237493_Interests.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041252083_Profile.resx">
-      <DependentUpon>201901041252083_Profile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041312270_Posts.resx">
-      <DependentUpon>201901041312270_Posts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041327102_BirthDate.resx">
-      <DependentUpon>201901041327102_BirthDate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901041415185_Profile.resx">
+      <DependentUpon>201901041415185_Profile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
