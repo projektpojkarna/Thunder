@@ -1,0 +1,54 @@
+﻿@model Thunder.Models.ProfileViewModel
+
+@{
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="row">
+                <img src="@Model.ImgPath" class="img-thumbnail" alt="@ViewBag.Name">
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="panel-heading">
+                <b>Presentation</b>
+            </div>
+            <div class="panel-body">
+                <p>@Model.Presentation</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <b>@ViewBag.Name</b> - @ViewBag.Age år<br />
+
+            <button data-toggle="collapse" data-target="#demo">
+                Vänner <span class="badge">@Model.Friends.Count</span>
+            </button>
+            <div id="demo" class="collapse">
+                <ul>
+                    @foreach (var f in Model.Friends)
+                    {
+                        var name = string.Concat(f.FirstName, " ", f.LastName);
+                    <li>
+                        @Html.ActionLink(name, "UserProfile", "User", f);
+                    </li>
+                    }
+                </ul>
+
+            </div>
+            <br />
+            <b>Intressen: </b>
+            <ul>
+                @foreach (var i in Model.Interests)
+                {
+                    <li>@i</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+
