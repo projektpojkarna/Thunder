@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Thunder.Models
@@ -71,6 +72,11 @@ namespace Thunder.Models
         [Display(Name = "Last Name")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Last name required")]
         public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Födelsedatum")]
+        public DateTime BirthDate { get; set; }
 
         [Required]
         [EmailAddress]
