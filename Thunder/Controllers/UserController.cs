@@ -45,10 +45,13 @@ namespace Thunder.Controllers
             });
         }
 
-        public ActionResult EditUser()
+        public ActionResult EditProfile()
         {
-            var user = GetCurrentUser();
-            return View(user.Id);
+            var u = GetCurrentUser().Profile;
+            //Profile u = new Profile();
+            return View(u);
+            
         }
+
     }
 }
