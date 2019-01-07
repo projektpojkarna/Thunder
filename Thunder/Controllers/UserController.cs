@@ -52,5 +52,11 @@ namespace Thunder.Controllers
             
         }
 
+        public SaveChanges(string newPresentation)
+        {
+            var p = GetCurrentUser().Profile;
+            p.Presentation = newPresentation;
+        }
+
     }
 }
