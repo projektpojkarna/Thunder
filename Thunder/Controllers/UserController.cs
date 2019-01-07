@@ -27,35 +27,15 @@ namespace Thunder.Controllers
             return View();
         }
 
-        public ActionResult UserProfile()
-        {
-            var u = GetCurrentUser();
-            var p = u.Profile;
-            if(p == null)
-            {
-                p = new Profile();
-            }
-            return View(new ProfileViewModel() {
-                Name = string.Concat(u.FirstName, " ", u.LastName),
-                Location = p.Location,
-                Occupation = p.Occupation,
-                Interests = p.Interests,
-                Presentation = p.Presentation,
-                ImgPath = p.ImgPath
-            });
-        }
+      
 
         public ActionResult EditProfile()
         {
             var u = GetCurrentUser().Profile;
+
+
             return View(u);
             
-        }
-
-        public SaveChanges(string newPresentation)
-        {
-            var p = GetCurrentUser().Profile;
-            p.Presentation = newPresentation;
         }
 
     }
