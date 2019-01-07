@@ -7,10 +7,10 @@
 <h2>Din personliga information</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Beskriv dig själv!</h4>
         <hr />

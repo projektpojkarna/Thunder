@@ -21,12 +21,13 @@ namespace Thunder.Controllers
         }
 
         [Route("profile/edit")]
-        [HttpGet]
-        public void EditProfile(string presentation, string occupation)
+        [HttpPost]
+        public void EditProfile(Profile model)
         {
             var ctx = new ApplicationDbContext();
             var u = GetCurrentUser();
-            var p = ctx.Profiles.Where(pr => pr.Id == u.Profile.Id);
+            var p = ctx.Profiles.FirstOrDefault(pr => pr.Id == u.Profile.Id);
+
 
             //Kod för att ändra i profilen här:
             //t.ex p.Presentation = presentation;
