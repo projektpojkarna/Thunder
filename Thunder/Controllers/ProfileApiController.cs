@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Thunder.Models;
 
@@ -35,6 +32,20 @@ namespace Thunder.Controllers
             //t.ex p.Presentation = presentation;
 
             ctx.SaveChanges();
+        }
+
+        [Route("profile/get")]
+        [HttpGet]
+        public ProfileViewModel GetProfile(string userId)
+        {
+            var ctx = new ApplicationDbContext();
+            var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            return new ProfileViewModel
+            {
+                Profile = user.Profile,
+                UserId = user.Id
+            };
+
         }
     }
 }

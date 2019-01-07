@@ -36,12 +36,8 @@ namespace Thunder.Controllers
                 p = new Profile();
             }
             return View(new ProfileViewModel() {
-                Name = string.Concat(u.FirstName, " ", u.LastName),
-                Location = p.Location,
-                Occupation = p.Occupation,
-                Interests = p.Interests,
-                Presentation = p.Presentation,
-                ImgPath = p.ImgPath
+                UserId = u.Id,
+                Profile = p
             });
         }
 
@@ -50,12 +46,6 @@ namespace Thunder.Controllers
             var u = GetCurrentUser().Profile;
             return View(u);
             
-        }
-
-        public SaveChanges(string newPresentation)
-        {
-            var p = GetCurrentUser().Profile;
-            p.Presentation = newPresentation;
         }
 
     }
