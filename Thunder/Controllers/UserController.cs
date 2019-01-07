@@ -27,23 +27,13 @@ namespace Thunder.Controllers
             return View();
         }
 
-        public ActionResult UserProfile()
-        {
-            var u = GetCurrentUser();
-            var p = u.Profile;
-            if(p == null)
-            {
-                p = new Profile();
-            }
-            return View(new ProfileViewModel() {
-                UserId = u.Id,
-                Profile = p
-            });
-        }
+      
 
         public ActionResult EditProfile()
         {
             var u = GetCurrentUser().Profile;
+
+
             return View(u);
             
         }

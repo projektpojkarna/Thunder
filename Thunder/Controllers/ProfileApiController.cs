@@ -11,28 +11,32 @@ namespace Thunder.Controllers
     public class ProfileApiController : ApiController
     {
 
-        private ApplicationUser GetCurrentUser()
+        private void SaveChanges(Profile p)
         {
-            var userId = User.Identity.GetUserId();
+            var ctx = new ApplicationDbContext();
             var manager =
-                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
+            var userId = User.Identity.GetUserId();
             var user = manager.FindById(userId);
-            return user;
+            user.Profile = p;
+            manager.Update(user);
+            ctx.SaveChanges();
         }
 
         [Route("profile/edit")]
         [HttpPost]
+        [Authorize]
         public void EditProfile(Profile model)
         {
-            var ctx = new ApplicationDbContext();
-            var u = GetCurrentUser();
-            var p = ctx.Profiles.FirstOrDefault(pr => pr.Id == u.Profile.Id);
-
-
-            //Kod för att ändra i profilen här:
-            //t.ex p.Presentation = presentation;
-
-            ctx.SaveChanges();
+            var p = new Profile()
+            {
+                Presentation = model.Presentation,
+                Occupation = model.Occupation,
+                Interests = model.Interests,
+                Location = model.Location,
+                ImgPath = model.ImgPath
+            };
+            SaveChanges(p);
         }
 
         [Route("profile/get")]
