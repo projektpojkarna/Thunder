@@ -38,5 +38,19 @@ namespace Thunder.Controllers
             };
             SaveChanges(p);
         }
+
+        [Route("profile/get")]
+        [HttpGet]
+        public ProfileViewModel GetProfile(string userId)
+        {
+            var ctx = new ApplicationDbContext();
+            var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            return new ProfileViewModel
+            {
+                Profile = user.Profile,
+                UserId = user.Id
+            };
+
+        }
     }
 }
