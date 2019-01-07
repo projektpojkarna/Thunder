@@ -151,11 +151,20 @@ namespace Thunder.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                    FirstName = model.FirstName, LastName = model.LastName, BirthDate = model.BirthDate};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+
+                var profileCtx = new ProfileDbContext();
+                profileCtx.Profiles.Add( new Profile()
+                {
+                    UserId = user.Id,
+                    BirthDate = model.BirthDate,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
+                });
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    profileCtx.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

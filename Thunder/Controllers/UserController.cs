@@ -27,16 +27,15 @@ namespace Thunder.Controllers
             return View();
         }
 
-      
-
+     
         public ActionResult EditProfile()
         {
-            var u = GetCurrentUser().Profile;
-
-
-            return View(u);
-            
+            var ctx = new ProfileDbContext();
+            var userId = User.Identity.GetUserId();
+            return View(new ProfileViewModel() {
+                    Profile = ctx.Profiles.FirstOrDefault(p => p.UserId == userId),
+                    UserId = GetCurrentUser().Id
+                });
         }
-
     }
 }

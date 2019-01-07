@@ -10,33 +10,20 @@ namespace Thunder.Controllers
     [RoutePrefix("api/user")]
     public class ProfileApiController : ApiController
     {
-
-        private void SaveChanges(Profile p)
-        {
-            var ctx = new ApplicationDbContext();
-            var manager =
-                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ctx));
-            var userId = User.Identity.GetUserId();
-            var user = manager.FindById(userId);
-            user.Profile = p;
-            manager.Update(user);
-            ctx.SaveChanges();
-        }
-
         [Route("profile/edit")]
         [HttpPost]
         [Authorize]
-        public void EditProfile(Profile model)
+        public void EditProfile(ProfileViewModel p)
         {
-            var p = new Profile()
-            {
-                Presentation = model.Presentation,
-                Occupation = model.Occupation,
-                Interests = model.Interests,
-                Location = model.Location,
-                ImgPath = model.ImgPath
-            };
-            SaveChanges(p);
+            var ctx = new ProfileDbContext();
+            var userId = User.Identity.GetUserId();
+            var profile = ctx.Profiles.FirstOrDefault(pr => pr.UserId == userId);
+            profile.Location = p.Profile.Location;
+            profile.Occupation = p.Profile.Occupation;
+            profile.ImgPath = p.Profile.ImgPath;
+            profile.Presentation = p.Profile.Presentation;
+
+            ctx.SaveChanges();
         }
 
         [Route("profile/get")]
@@ -47,7 +34,7 @@ namespace Thunder.Controllers
             var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
             return new ProfileViewModel
             {
-                Profile = user.Profile,
+                Profile = null,
                 UserId = user.Id
             };
 
