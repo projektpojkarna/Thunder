@@ -48,7 +48,6 @@ namespace Thunder.Controllers
         public ActionResult EditProfile()
         {
             var u = GetCurrentUser().Profile;
-            //Profile u = new Profile();
             return View(u);
             
         }

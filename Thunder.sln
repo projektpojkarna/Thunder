@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunder", "Thunder\Thunder.csproj", "{97970B3B-325F-46AA-8C3A-414D7E589E75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thunder.Tests", "Thunder.Tests\Thunder.Tests.csproj", "{0F421D8C-C433-4070-BFB3-4AD43E66B53B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{97970B3B-325F-46AA-8C3A-414D7E589E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97970B3B-325F-46AA-8C3A-414D7E589E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97970B3B-325F-46AA-8C3A-414D7E589E75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F421D8C-C433-4070-BFB3-4AD43E66B53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F421D8C-C433-4070-BFB3-4AD43E66B53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F421D8C-C433-4070-BFB3-4AD43E66B53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F421D8C-C433-4070-BFB3-4AD43E66B53B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
