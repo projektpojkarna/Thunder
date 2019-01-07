@@ -202,9 +202,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DbHelper.cs" />
-    <Compile Include="Migrations\201901041547254_fungea för helvete.cs" />
-    <Compile Include="Migrations\201901041547254_fungea för helvete.Designer.cs">
-      <DependentUpon>201901041547254_fungea för helvete.cs</DependentUpon>
+    <Compile Include="Migrations\201901051531135_lkjsdfhbg.cs" />
+    <Compile Include="Migrations\201901051531135_lkjsdfhbg.Designer.cs">
+      <DependentUpon>201901051531135_lkjsdfhbg.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -277,7 +277,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
-    <Content Include="Views\User\EditUser.cshtml" />
+    <Content Include="Views\User\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -296,8 +296,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901041547254_fungea för helvete.resx">
-      <DependentUpon>201901041547254_fungea för helvete.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901051531135_lkjsdfhbg.resx">
+      <DependentUpon>201901051531135_lkjsdfhbg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

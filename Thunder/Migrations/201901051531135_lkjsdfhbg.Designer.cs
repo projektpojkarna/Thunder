@@ -7,13 +7,13 @@ namespace Thunder.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class fungeaförhelvete : IMigrationMetadata
+    public sealed partial class lkjsdfhbg : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fungeaförhelvete));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(lkjsdfhbg));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901041547254_fungea för helvete"; }
+            get { return "201901051531135_lkjsdfhbg"; }
         }
         
         string IMigrationMetadata.Source
