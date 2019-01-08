@@ -19,14 +19,13 @@
     <tbody>
         @foreach (Profile profile in @Model)
         {
-           <tr>
-                <th> @Html.DisplayFor(modelitem => profile.Id)</th>
-                <td> @Html.ActionLink(profile.FirstName, "Profile-view", new { id = profile.Id })</td>
+            <tr>
+                <th> @Html.DisplayFor(modelitem => profile.UserId)</th>
+                <td> @Html.ActionLink(profile.FirstName, "Profile-view", new { id = profile.UserId })</td>
                 <td> @Html.DisplayFor(modelitem => profile.LastName)</td>
                 <td> @Html.DisplayFor(modelitem => profile.Occupation)</td>
             </tr>
         }
-        
+
     </tbody>
 </table>
-
