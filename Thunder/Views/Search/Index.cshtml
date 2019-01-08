@@ -21,7 +21,8 @@
         {
             <tr>
                 <th> @Html.DisplayFor(modelitem => profile.UserId)</th>
-                <td> @Html.ActionLink(profile.FirstName, "Profile-view", new { id = profile.UserId })</td>
+                <td> @Html.ActionLink(profile.FirstName, "ViewProfile/", "User",
+                        new { userId = profile.UserId }, null)</td>
                 <td> @Html.DisplayFor(modelitem => profile.LastName)</td>
                 <td> @Html.DisplayFor(modelitem => profile.Occupation)</td>
             </tr>

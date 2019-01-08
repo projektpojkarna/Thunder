@@ -7,17 +7,12 @@
     var fullName = string.Concat(profileData.FirstName, " ", profileData.LastName);
     var age = DateTime.Now.Year - profileData.BirthDate.Year;
 }
-
-
-@{
-    ViewBag.Title = "UserProfile";
-}
-
+<h2>Profilsida för @fullName</h2>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3">
             <div class="row">
-                <img src="@profileData.ImgPath" class="img-thumbnail" alt="@ViewBag.Name">
+                <img src="@profileData.ImgPath" class="img-thumbnail" alt="profilbild">
             </div>
         </div>
         <div class="col-lg-9">
@@ -32,17 +27,62 @@
     <div class="row">
         <div class="col-lg-3">
             <b>@fullName</b> - @age år<br />
-
-            <button id="toggle-friends">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong">
                 Vänner <span class="badge">@friends.Count</span>
             </button>
+            <button id="add-friend" type="button" class="btn btn-default">Lägg till vän</button>
             <br />
-            <b>Intressen: </b>
-            <ul>
-        
-            </ul>
+            <b>Intressen: <span class="badge">@profileData.Interests.Count</span> </b>
+            <ul></ul>
         </div>
     </div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Vänner</h5>
+            </div>
+            <div class="modal-body">
+                @{ if (friends.Count == 0)
+                    {
+                        <p>Här var det tomt...</p>
+                    }
+                    else
+                    {
+                        <ul>
+                            @foreach(var f in friends)
+                            {
+                                <li>
+                                    @Html.ActionLink(f.FullName, "ViewProfile", "User",
+                                    new { userId = f.UserId })
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $('#toggle-friends').click(function (ev) {
+
+        });
+
+        $('#add-friend').click(function (ev) {
+
+        });
+    </script>
+}
 
