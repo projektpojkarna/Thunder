@@ -1,11 +1,45 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/bootstrap-profile.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<body>
+    
+    <div class="row">
+        <div class="col-md-4 col-sm-4 text-center">
+            <img class="img-circle" src="img/img1.jpg">
+            <h3>Person Name</h3>
+            <h4>Job Profile Goes Here</h4>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec enim sapien. Aliquam erat volutpat.
+                Quisque eu ante at tortor imperdiet gravida nec sed turpis. Phasellus augue augue.
+            </p>
+        </div>
+        <div class="col-md-4 col-sm-4 text-center">
+            <img class="img-circle" src="img/img2.jpg">
+            <h3>Person Name</h3>
+            <h4>Job Profile Goes Here</h4>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec enim sapien. Aliquam erat volutpat.
+                Quisque eu ante at tortor imperdiet gravida nec sed turpis. Phasellus augue augue.
+            </p>
+        </div>
+        <div class="col-md-4 col-sm-4 text-center">
+            <img class="img-circle" src="img/img2.jpg">
+            <h3>Person Name</h3>
+            <h4>Job Profile Goes Here</h4>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec enim sapien. Aliquam erat volutpat.
+                Quisque eu ante at tortor imperdiet gravida nec sed turpis. Phasellus augue augue.
+            </p>
+        </div>
+        <p><a>@Html.ActionLink("Logga in", "Login", "Account")</a></p>
+    </div>
+    
 
-<div class="jumbotron">
-    <h2>Hitta din partner idag!</h2>
-    <p class="lead">Med Thunder kan du matchas ihop med en partner som tar dig på kukN eller pussyN</p>
-    <p class="lead">Registerar dig idag och få en låda med choklad hemskickad till dig</p>
-    <p><a>@Html.ActionLink("Logga in", "Login", "Account")</a></p>
-</div>
+    <!--Core JavaScript file  -->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <!--bootstrap JavaScript file  -->
+    <script src="~/Scripts/bootstrap-profile.js"></script>
+</body>
 
