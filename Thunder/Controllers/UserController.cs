@@ -31,7 +31,12 @@ namespace Thunder.Controllers
             var friendList = new List<FriendViewModel>();
 
             var profile = profileCtx.Profiles.FirstOrDefault(p => p.UserId == userId);
-            var posts = postCtx.Posts.Where(po => po.UserId == userId).ToList();
+            if(profile.Interests == null)
+            {
+                profile.Interests = new HashSet<string>();
+            }
+
+           var posts = postCtx.Posts.Where(po => po.UserId == userId).ToList();
 
             var friends = friendCtx.Friends.FirstOrDefault(u => u.UserId == userId);
             if (friends != null)
@@ -68,6 +73,7 @@ namespace Thunder.Controllers
             return View(profileViewModel);
         }
 
+        [HttpGet]
         public ActionResult ViewProfile(string userId)
         {
             if(string.IsNullOrEmpty(userId))
