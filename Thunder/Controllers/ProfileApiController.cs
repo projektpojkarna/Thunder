@@ -7,12 +7,12 @@ using Thunder.Models;
 
 namespace Thunder.Controllers
 {
+    [Authorize]
     [RoutePrefix("api/user")]
     public class ProfileApiController : ApiController
     {
         [Route("profile/edit")]
         [HttpPost]
-        [Authorize]
         public void EditProfile(ProfileViewModel p)
         {
             var ctx = new ProfileDbContext();
@@ -26,18 +26,11 @@ namespace Thunder.Controllers
             ctx.SaveChanges();
         }
 
-        [Route("profile/get")]
+        [Route("get")]
         [HttpGet]
         public ProfileViewModel GetProfile(string userId)
         {
-            var ctx = new ApplicationDbContext();
-            var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
-            return new ProfileViewModel
-            {
-                Profile = null,
-                UserId = user.Id
-            };
-
+            return new ProfileViewModel();
         }
     }
 }

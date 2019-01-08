@@ -161,6 +161,7 @@ namespace Thunder.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName
                 });
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

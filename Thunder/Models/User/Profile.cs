@@ -10,8 +10,6 @@ namespace Thunder.Models
     public class Profile
     {
         [Key]
-        public int Id { get; set; }
-
         public string UserId { get; set; }
         
         public string FirstName { get; set; }
