@@ -29,6 +29,18 @@
             </div>
         </div>
     </div>
+
+    <div class="navbar-right">
+        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+        {
+            <ul class="nav navbar-nav">
+                <li>@Html.TextBox("searchString")</li>
+                <li><input type="submit" value="Search" /></li>
+            </ul>
+        }
+    </div>
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />
