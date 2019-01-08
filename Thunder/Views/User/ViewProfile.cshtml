@@ -1,0 +1,48 @@
+﻿@using Thunder.Models
+@model ProfileViewModel
+@{
+    var profileData = Model.Profile;
+    List<Post> posts = Model.Posts;
+    var friends = Model.Friends;
+    var fullName = string.Concat(profileData.FirstName, " ", profileData.LastName);
+    var age = DateTime.Now.Year - profileData.BirthDate.Year;
+}
+
+
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="row">
+                <img src="@profileData.ImgPath" class="img-thumbnail" alt="@ViewBag.Name">
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="panel-heading">
+                <b>Presentation</b>
+            </div>
+            <div class="panel-body">
+                <p>@profileData.Presentation</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <b>@fullName</b> - @age år<br />
+
+            <button id="toggle-friends">
+                Vänner <span class="badge">@friends.Count</span>
+            </button>
+            <br />
+            <b>Intressen: </b>
+            <ul>
+        
+            </ul>
+        </div>
+    </div>
+</div>
+
+

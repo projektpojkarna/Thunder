@@ -7,7 +7,7 @@
 <h2>Din personliga information</h2>
 
 
-@using (Html.BeginForm("profile/edit", "api/user/", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("profile/edit", "api/user", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     
@@ -15,7 +15,7 @@
         <h4>Beskriv dig själv!</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.Profile)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Profile.Presentation, htmlAttributes: new { @class = "control-label col-md-2" })

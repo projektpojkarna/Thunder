@@ -224,8 +224,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\AccountViewModels.cs" />
-    <Compile Include="Models\User\Friends.cs" />
+    <Compile Include="Models\User\FriendList.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ViewModel\FriendViewModel.cs" />
     <Compile Include="Models\ViewModel\ManageViewModels.cs" />
     <Compile Include="Models\User\Message.cs" />
     <Compile Include="Models\User\Post.cs" />
@@ -295,7 +296,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
-    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\ViewProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

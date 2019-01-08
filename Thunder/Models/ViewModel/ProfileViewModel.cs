@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using Thunder.Models.ViewModel;
 
 namespace Thunder.Models
 {
     public class ProfileViewModel
     {
-        public string UserId { get; set; }
         public Profile Profile { get; set; }
+        public List<FriendViewModel> Friends { get; set; }
+        public List<Post> Posts { get; set; }
     }
 }
