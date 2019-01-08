@@ -217,6 +217,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileApiController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -224,6 +225,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\FriendListConfig.cs" />
+    <Compile Include="Migrations\ImageConfig.cs" />
+    <Compile Include="Models\User\Image.cs" />
     <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\User\FriendList.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -299,9 +303,11 @@
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Image\AddImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

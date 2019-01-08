@@ -22,7 +22,9 @@ namespace Thunder.Models
         public string Presentation { get; set; }
         public HashSet<string> Interests { get; set; }
 
-        public string ImgPath { get; set; }
+  
+
+        
     }
 
     public class ProfileDbContext : DbContext
