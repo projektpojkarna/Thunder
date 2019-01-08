@@ -20,7 +20,6 @@ namespace Thunder.Controllers
             var profile = ctx.Profiles.FirstOrDefault(pr => pr.UserId == userId);
             profile.Location = p.Profile.Location;
             profile.Occupation = p.Profile.Occupation;
-            profile.ImgPath = p.Profile.ImgPath;
             profile.Presentation = p.Profile.Presentation;
 
             ctx.SaveChanges();
@@ -32,5 +31,7 @@ namespace Thunder.Controllers
         {
             return new ProfileViewModel();
         }
+
     }
+  
 }
