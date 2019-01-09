@@ -32,30 +32,21 @@ namespace Thunder.Controllers
             imageModel.ImageFile.SaveAs(fileName);
             imageModel.UserID = User.Identity.GetUserId();
 
-
             ImageDbContext ctx = new ImageDbContext();
-                
-                ctx.Images.Add(imageModel);
-                ctx.SaveChanges();
-            
-           
+        
+            var existingImage = ctx.Images.FirstOrDefault(u => u.UserID == imageModel.UserID);
+            if(existingImage != null)
+            {
+                ctx.Images.Remove(existingImage);
+            }
+
+            ctx.Images.Add(imageModel);
+            ctx.SaveChanges();
 
             ModelState.Clear();
             
 
         }
-
-        /*[HttpGet]
-        public ActionResult ViewImage(int Id)
-        {
-            Image imageModel = new Image();
-
-            ImageDbContext ctx = new ImageDbContext();
-
-            imageModel = ctx.Images.Where(x => x.ImageID == Id).FirstOrDefault();
-
-            return View(imageModel);
-        }
-        */
+        
     }
 }

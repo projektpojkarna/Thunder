@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Thunder.Models;
+using Thunder.Models.User;
 using Thunder.Models.ViewModel;
 
 namespace Thunder.Controllers
@@ -13,22 +14,15 @@ namespace Thunder.Controllers
     [Authorize] //Alla vyer i denna kontroller kräver inlogg
     public class UserController : Controller
     {
-        private ApplicationUser GetCurrentUser()
-        {
-            var userId = User.Identity.GetUserId();
-            var manager =
-                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var user = manager.FindById(userId);
-            return user;
-        }
 
         private ProfileViewModel GetProfileViewModel(string userId)
         {
             var profileCtx = new ProfileDbContext();
             var friendCtx = new FriendListDbContext();
             var postCtx = new PostDbContext();
+            var ImgCtx = new ImageDbContext();
 
-            var friendList = new List<FriendViewModel>();
+            var image = ImgCtx.Images.FirstOrDefault(u => u.UserID == userId);
 
             var profile = profileCtx.Profiles.FirstOrDefault(p => p.UserId == userId);
             if(profile.Interests == null)
@@ -39,6 +33,8 @@ namespace Thunder.Controllers
            var posts = postCtx.Posts.Where(po => po.UserId == userId).ToList();
 
             var friends = friendCtx.Friends.FirstOrDefault(u => u.UserId == userId);
+            var friendList = new List<FriendViewModel>();
+
             if (friends != null)
             {
                 foreach (var f in friends.Friend_UserIds)
@@ -48,11 +44,13 @@ namespace Thunder.Controllers
                 }
             }
 
+
             return new ProfileViewModel()
             {
                 Profile = profile,
                 Friends = friendList,
-                Posts = posts
+                Posts = posts,
+                Image = image
             };
         }
 

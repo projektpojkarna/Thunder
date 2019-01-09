@@ -25,13 +25,6 @@ namespace Thunder.Controllers
             ctx.SaveChanges();
         }
 
-        [Route("get")]
-        [HttpGet]
-        public ProfileViewModel GetProfile(string userId)
-        {
-            return new ProfileViewModel();
-        }
-
     }
   
 }
