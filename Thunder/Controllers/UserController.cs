@@ -71,6 +71,20 @@ namespace Thunder.Controllers
             return View(profileViewModel);
         }
 
+        [HttpPost]
+        public ActionResult EditProfile(ProfileViewModel p)
+        {
+            var ctx = new ProfileDbContext();
+            var userId = User.Identity.GetUserId();
+            var profile = ctx.Profiles.FirstOrDefault(pr => pr.UserId == userId);
+            profile.Location = p.Profile.Location;
+            profile.Occupation = p.Profile.Occupation;
+            profile.Presentation = p.Profile.Presentation;
+            ctx.SaveChanges();
+
+            return RedirectToAction("ViewProfile");
+        }
+
         [HttpGet]
         public ActionResult ViewProfile(string userId)
         {
