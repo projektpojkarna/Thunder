@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Thunder.Models.User;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Image = Thunder.Models.User.Image;
 
 namespace Thunder.Controllers
 {
@@ -22,7 +23,7 @@ namespace Thunder.Controllers
         }
 
         [HttpPost]
-        public void Add(Thunder.Models.User.Image imageModel)
+        public ActionResult Add(Thunder.Models.User.Image imageModel)
         {
             string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
             string extension = Path.GetExtension(imageModel.ImageFile.FileName);
@@ -32,20 +33,27 @@ namespace Thunder.Controllers
             imageModel.ImageFile.SaveAs(fileName);
             imageModel.UserID = User.Identity.GetUserId();
 
+
             ImageDbContext ctx = new ImageDbContext();
-        
             var existingImage = ctx.Images.FirstOrDefault(u => u.UserID == imageModel.UserID);
             if(existingImage != null)
             {
                 ctx.Images.Remove(existingImage);
             }
-
             ctx.Images.Add(imageModel);
             ctx.SaveChanges();
+            
+           
 
             ModelState.Clear();
-            
 
+            return RedirectToAction("ViewImage", imageModel);
+        }
+
+        [HttpGet]
+        public ActionResult ViewImage(Image imageModel)
+        {
+            return View(imageModel);
         }
         
     }
