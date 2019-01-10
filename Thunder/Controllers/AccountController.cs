@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Thunder.Models;
+using Thunder.Models.User;
 
 namespace Thunder.Controllers
 {
@@ -162,9 +163,23 @@ namespace Thunder.Controllers
                     LastName = model.LastName
                 });
 
+                var ImgCtx = new ImageDbContext();
+
+                ImgCtx.Images.Add(new Image()
+                {
+                    UserID = user.Id,
+                    Title = "Default",
+                    ImagePath = "~/Image/Default.jpg",
+                    ImageFile = null
+
+                });
+
+
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    ImgCtx.SaveChanges();
                     profileCtx.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     

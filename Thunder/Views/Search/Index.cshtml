@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Thunder.Models.Profile>
+﻿@model Dictionary<Profile, Thunder.Models.User.Image>
 @using Thunder.Models;
 
 @{
@@ -17,14 +16,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Profile profile in @Model)
+        @{ var keys = Model.Keys; }
+        @foreach (var item in keys)
         {
             <tr>
-                <th> @Html.DisplayFor(modelitem => profile.UserId)</th>
-                <td> @Html.ActionLink(profile.FirstName, "ViewProfile/", "User",
-                        new { userId = profile.UserId }, null)</td>
-                <td> @Html.DisplayFor(modelitem => profile.LastName)</td>
-                <td> @Html.DisplayFor(modelitem => profile.Occupation)</td>
+                <th> <img class="img-thumbnail" src="@Url.Content(Model[item].ImagePath)" /></th>
+                <td>
+                    @Html.ActionLink(item.FirstName, "ViewProfile/", "User",
+                       new { userId = item.UserId }, null)
+                </td>
+                <td> @Html.DisplayFor(modelitem => item.LastName)</td>
+                <td> @Html.DisplayFor(modelitem => item.Occupation)</td>
             </tr>
         }
 

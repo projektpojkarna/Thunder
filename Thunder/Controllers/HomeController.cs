@@ -14,7 +14,20 @@ namespace Thunder.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var profiles = new ProfileDbContext().Profiles.ToList();
+            var images = new ImageDbContext().Images.ToList();
+            var map = new Dictionary<Profile, Image>();
+            foreach (var i in images)
+            {
+                foreach (var p in profiles)
+                {
+                    if (i.UserID == p.UserId)
+                    {
+                        map.Add(p, i);
+                    }
+                }
+            }
+            return View(map);
         }
 
         public ActionResult About()
@@ -58,3 +71,6 @@ namespace Thunder.Controllers
         }
     }
 }
+
+
+
