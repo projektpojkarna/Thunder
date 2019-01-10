@@ -9,20 +9,23 @@ using Thunder.Models.User;
 
 namespace Thunder.Models
 {
-    public class FriendList
+    public class Friends
     {
         [Key]
-        public string UserId { get; set; }
+        public int Id { get; set; }
 
-        public List<string> Friend_UserIds {get;set;} //Lista med UserId
+        public string UserID { get; set; }
+        public string FriendUserId { get; set; }
+
+        
     }
 
 
 
-    public class FriendListDbContext : DbContext
+    public class FriendsDbContext : DbContext
     {
-        public DbSet<FriendList> Friends { get; set; }
+        public DbSet<Friends> Friends { get; set; }
 
-        public FriendListDbContext() : base("DefaultConnection") { }
+        public FriendsDbContext() : base("DefaultConnection") { }
     }
 }
