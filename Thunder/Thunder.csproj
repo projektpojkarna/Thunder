@@ -235,7 +235,6 @@
       <DependentUpon>201901091039047_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\FriendListConfig.cs" />
-    <Compile Include="Migrations\ImageConfig.cs" />
     <Compile Include="Models\User\FriendRequests.cs" />
     <Compile Include="Models\User\Image.cs" />
     <Compile Include="Models\ViewModel\AccountViewModels.cs" />
