@@ -5,14 +5,14 @@ namespace Thunder.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class FriendListConfig : DbMigrationsConfiguration<Thunder.Models.FriendListDbContext>
+    internal sealed class FriendReqConfig : DbMigrationsConfiguration<Thunder.Models.User.FriendRequestDbContext>
     {
-        public FriendListConfig()
+        public FriendReqConfig()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Thunder.Models.FriendListDbContext context)
+        protected override void Seed(Thunder.Models.User.FriendRequestDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

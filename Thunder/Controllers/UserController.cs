@@ -18,7 +18,7 @@ namespace Thunder.Controllers
         private ProfileViewModel GetProfileViewModel(string userId)
         {
             var profileCtx = new ProfileDbContext();
-            var friendCtx = new FriendListDbContext();
+            var friendCtx = new FriendsDbContext();
             var postCtx = new PostDbContext();
             var ImgCtx = new ImageDbContext();
 
@@ -30,20 +30,18 @@ namespace Thunder.Controllers
                 profile.Interests = new HashSet<string>();
             }
 
-           var posts = postCtx.Posts.Where(po => po.UserId == userId).ToList();
-
-            var friends = friendCtx.Friends.FirstOrDefault(u => u.UserId == userId);
+            var posts = postCtx.Posts.Where(po => po.UserId == userId).ToList();
+            var friends = friendCtx.Friends.Where(f => f.UserID == userId).ToList();
             var friendList = new List<FriendViewModel>();
 
             if (friends != null)
             {
-                foreach (var f in friends.Friend_UserIds)
+                foreach (var f in friends)
                 {
-                    var friendProfile = profileCtx.Profiles.SingleOrDefault(p => p.UserId == f);
+                    var friendProfile = profileCtx.Profiles.SingleOrDefault(p => p.UserId == f.FriendUserId);
                     friendList.Add(FriendViewModel.FromProfile(friendProfile));
                 }
             }
-
 
             return new ProfileViewModel()
             {
@@ -85,7 +83,6 @@ namespace Thunder.Controllers
             return RedirectToAction("ViewProfile");
         }
 
-        [HttpGet]
         public ActionResult ViewProfile(string userId)
         {
             if(string.IsNullOrEmpty(userId))
@@ -94,6 +91,24 @@ namespace Thunder.Controllers
             }
             var profileViewModel = GetProfileViewModel(userId);
             return View(profileViewModel);
+        }
+        
+
+        [HttpGet]
+        public ActionResult SendFriendRequest(string userId)
+        {
+            if(userId != User.Identity.GetUserId())
+            {
+                var ctx = new FriendRequestDbContext();
+                ctx.Requests.Add(new FriendRequest()
+                {
+                    SenderId = User.Identity.GetUserId(),
+                    RecieverId = userId
+                });
+                ctx.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

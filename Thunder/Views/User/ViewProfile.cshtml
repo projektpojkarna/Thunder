@@ -1,4 +1,5 @@
 ﻿@using Thunder.Models
+@using Microsoft.AspNet.Identity
 @model ProfileViewModel
 @{
     var profileData = Model.Profile;
@@ -6,13 +7,17 @@
     var friends = Model.Friends;
     var fullName = string.Concat(profileData.FirstName, " ", profileData.LastName);
     var age = DateTime.Now.Year - profileData.BirthDate.Year;
+    var currentUserProfile = (User.Identity.GetUserId() == profileData.UserId);
 }
 <h2>Profilsida för @fullName</h2>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3">
             <div class="row">
-                <img src="@Url.Content(Model.Image.ImagePath)" class="img-thumbnail" alt="profilbild">
+                @if (Model.Image != null)
+                {
+                    <img src="@Url.Content(Model.Image.ImagePath)" class="img-thumbnail" alt="profilbild">
+                }
             </div>
         </div>
         <div class="col-lg-9">
@@ -31,10 +36,19 @@
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong">
                 Vänner <span class="badge">@friends.Count</span>
             </button>
-            <button id="add-friend" type="button" class="btn btn-default">Lägg till vän</button>
+            @if (!currentUserProfile)
+            {
+                @Html.ActionLink("Lägg till vän", "AddFriend", "User",
+                                 new { userId = profileData.UserId },
+                                 new { @class = "btn btn-default" })
+            }
             <br />
             <b>Intressen: <span class="badge">@profileData.Interests.Count</span> </b>
             <ul></ul>
+        </div>
+        <div class="col-lg-9">
+            <h4>@string.Concat(fullName,"s") vägg:</h4>
+            @Html.TextArea("postText");
         </div>
     </div>
 </div>
@@ -56,11 +70,11 @@
                     else
                     {
                         <ul>
-                            @foreach(var f in friends)
+                            @foreach (var f in friends)
                             {
                                 <li>
                                     @Html.ActionLink(f.FullName, "ViewProfile", "User",
-                                    new { userId = f.UserId })
+                                        new { userId = f.UserId })
                                 </li>
                             }
                         </ul>
@@ -75,13 +89,12 @@
 </div>
 
 @section scripts {
-    <script>
+    <script type="text/javascript">
         $('#toggle-friends').click(function (ev) {
 
         });
 
-        $('#add-friend').click(function (ev) {
-
+        $("#btnAddFriend").click(function () {
         });
     </script>
 }

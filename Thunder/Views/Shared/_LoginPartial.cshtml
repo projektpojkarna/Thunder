@@ -1,17 +1,24 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Thunder.Models.User
+@using Thunder.Models.ViewModel
 @if (Request.IsAuthenticated)
 {
+    var uId = User.Identity.GetUserId();
+    var ctx = new FriendRequestDbContext();
+    int friendReqCount= ctx.Requests.Count(u => u.RecieverId == uId);
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+    </li>
+    @{Html.RenderAction("_FriendRequestPartial", "Home");}
+    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+</ul>
     }
+    
 }
 else
 {
