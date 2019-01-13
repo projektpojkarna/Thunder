@@ -1,0 +1,18 @@
+﻿@model List<Thunder.Models.ViewModel.PostViewModel>
+
+
+@if (Model.Count > 0)
+{
+    foreach (var p in Model)
+    {
+        <blockquote class="blockquote">
+            <p>@p.Text</p>
+            <footer>@Html.ActionLink(p.Author_FullName, "ViewProfile", 
+                   new { userId = p.Author_UserId })</footer>
+        </blockquote>
+    }
+}
+else
+{
+    <p>Här var det tomt..</p>
+}

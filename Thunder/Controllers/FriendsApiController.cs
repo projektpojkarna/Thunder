@@ -36,7 +36,7 @@ namespace Thunder.Controllers
             var alreadyFriends = ctx.Friends.Any(u => u.UserID == currentUserId && u.FriendUserId == userID);
             if(! alreadyFriends)
             {
-                ctx.Friends.Add(new Friends()
+                ctx.Friends.Add(new Friend()
                 {
                     UserID = currentUserId,
                     FriendUserId = userID
@@ -45,6 +45,16 @@ namespace Thunder.Controllers
             }
             ctx.SaveChanges();
         }
-        
+
+        [HttpGet]
+        [Route("remove/removeFriend")]
+        public void RemoveFriend(string userId)
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var ctx = new FriendsDbContext();
+            var friendToRemove = ctx.Friends.FirstOrDefault(p => p.FriendUserId == userId);
+            ctx.Friends.Remove(friendToRemove);
+        }
+
     }
 }

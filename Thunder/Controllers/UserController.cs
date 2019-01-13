@@ -25,7 +25,7 @@ namespace Thunder.Controllers
             var image = ImgCtx.Images.FirstOrDefault(u => u.UserID == userId);
 
             var profile = profileCtx.Profiles.FirstOrDefault(p => p.UserId == userId);
-            if(profile.Interests == null)
+            if (profile.Interests == null)
             {
                 profile.Interests = new HashSet<string>();
             }
@@ -56,10 +56,9 @@ namespace Thunder.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("ViewProfile");
         }
 
-     
         public ActionResult EditProfile()
         {
             var ctx = new ProfileDbContext();
@@ -85,19 +84,18 @@ namespace Thunder.Controllers
 
         public ActionResult ViewProfile(string userId)
         {
-            if(string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(userId))
             {
                 userId = User.Identity.GetUserId();
             }
             var profileViewModel = GetProfileViewModel(userId);
             return View(profileViewModel);
         }
-        
 
         [HttpGet]
         public ActionResult SendFriendRequest(string userId)
         {
-            if(userId != User.Identity.GetUserId())
+            if (userId != User.Identity.GetUserId())
             {
                 var ctx = new FriendRequestDbContext();
                 ctx.Requests.Add(new FriendRequest()
@@ -109,6 +107,27 @@ namespace Thunder.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult _DisplayPostsPartial(string userId)
+        {
+            var posts = new PostDbContext().Posts.Where(p => p.UserId == userId).ToList();
+            var authors = new ProfileDbContext().Profiles.ToList();
+            var postList = new List<PostViewModel>();
+
+            foreach (var p in posts)
+            {
+                var author = authors.FirstOrDefault(a => a.UserId == p.Author_UserId);
+
+                postList.Add(new PostViewModel()
+                {
+                    Author_UserId = p.Author_UserId,
+                    Author_FullName = string.Concat(author.FirstName, " ", author.LastName),
+                    Text = p.Text,
+                    UserId = p.UserId
+                });
+            }
+            return PartialView(postList);
         }
     }
 }
