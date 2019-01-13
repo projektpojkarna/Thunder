@@ -9,7 +9,7 @@ using Thunder.Models.User;
 
 namespace Thunder.Models
 {
-    public class Friends
+    public class Friend
     {
         [Key]
         public int Id { get; set; }
@@ -24,7 +24,7 @@ namespace Thunder.Models
 
     public class FriendsDbContext : DbContext
     {
-        public DbSet<Friends> Friends { get; set; }
+        public DbSet<Friend> Friends { get; set; }
 
         public FriendsDbContext() : base("DefaultConnection") { }
     }
