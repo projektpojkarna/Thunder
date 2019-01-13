@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Thunder.Models;
 using Thunder.Models.User;
 using Thunder.Models.ViewModel;
+using static Thunder.Models.Profile;
 
 namespace Thunder.Controllers
 {
@@ -68,6 +69,18 @@ namespace Thunder.Controllers
             }
 
             return PartialView("_FriendRequestPartial", fReqList);
+        }
+
+        [Authorize]
+        public ActionResult _ShowUsernamePartial()
+        {
+
+            var uId = User.Identity.GetUserId();
+            var profile = new ProfileDbContext().Profiles.SingleOrDefault(p => p.UserId == uId);
+
+            
+            return PartialView("_ShowUsernamePartial",profile);
+            
         }
     }
 }

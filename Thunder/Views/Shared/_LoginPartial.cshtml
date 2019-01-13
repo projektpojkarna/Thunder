@@ -3,22 +3,32 @@
 @using Thunder.Models.ViewModel
 @if (Request.IsAuthenticated)
 {
+
+    <div class="navbar-right" style="margin-top:15px;">
+        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+        {
+            <ul class="nav navbar-nav">
+                <li>@Html.TextBox("searchString")</li>
+                <li><input type="submit" value="Search" /></li>
+            </ul>
+        }
+    </div> 
     var uId = User.Identity.GetUserId();
     var ctx = new FriendRequestDbContext();
-    int friendReqCount= ctx.Requests.Count(u => u.RecieverId == uId);
+    int friendReqCount = ctx.Requests.Count(u => u.RecieverId == uId);
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-<ul class="nav navbar-nav navbar-right">
-    <li>
-        @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-    </li>
-    @{Html.RenderAction("_FriendRequestPartial", "Home");}
-    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-</ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @{Html.RenderAction("_ShowUsernamePartial", "Home",null);}
+            </li>
+            @{Html.RenderAction("_FriendRequestPartial", "Home");}
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     }
-    
+
 }
 else
 {

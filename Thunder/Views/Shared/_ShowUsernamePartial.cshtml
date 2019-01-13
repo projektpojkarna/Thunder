@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNet.Identity
+@using Thunder.Models.ViewModel
+@model Thunder.Models.Profile
+
+@if (Model != null)
+{
+
+@Html.ActionLink(Model.FirstName + " " + Model.LastName, "ViewProfile", "User")
+
+}
