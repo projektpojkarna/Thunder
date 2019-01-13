@@ -1,11 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
-@using Thunder.Models.User
-@using Thunder.Models.ViewModel
 @if (Request.IsAuthenticated)
 {
-    var uId = User.Identity.GetUserId();
-    var ctx = new FriendRequestDbContext();
-    int friendReqCount= ctx.Requests.Count(u => u.RecieverId == uId);
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()

@@ -7,55 +7,65 @@
     var friends = Model.Friends;
     var fullName = string.Concat(profileData.FirstName, " ", profileData.LastName);
     var age = DateTime.Now.Year - profileData.BirthDate.Year;
-    var currentUserProfile = (User.Identity.GetUserId() == profileData.UserId);
+    var isCurrentUser = (User.Identity.GetUserId() == profileData.UserId);
+    var alreadyFriends = friends.Any(f => f.UserId == User.Identity.GetUserId());
 }
-<h2>Profilsida för @fullName</h2>
+<h2 id="testRubrik">Profilsida för @fullName</h2>
 <div class="container-fluid">
+
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="row">
                 @if (Model.Image != null)
                 {
                     <img src="@Url.Content(Model.Image.ImagePath)" class="img-thumbnail" alt="profilbild">
                 }
             </div>
-        </div>
-        <div class="col-lg-9">
-            <div class="panel-heading">
-                <b>Presentation</b>
+            <div class="row">
+                <b>@fullName</b> - @age år<br />
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong">
+                    Vänner <span class="badge">@friends.Count</span>
+                </button>
+                @if (!isCurrentUser && !alreadyFriends)
+                {
+                    @Html.ActionLink("Lägg till vän", "SendFriendRequest", "User",
+                                        new { userId = profileData.UserId },
+                                        new { @class = "btn btn-default" })
+                }
+                else
+                {
+                    <span class="btn btn-success">Ni är vänner <span class="glyphicon glyphicon-heart"></span></span>
+                }
+                <br />
+                <b>Intressen: <span class="badge">@profileData.Interests.Count</span> </b>
+                <ul></ul>
             </div>
-            <div class="panel-body">
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <h4>Presentation</h4>
                 <p>@profileData.Presentation</p>
             </div>
         </div>
     </div>
+    @if (!isCurrentUser)
+    {
+        <div class="row">
+            <div class="col-12">
+                @{Html.RenderPartial("_NewPostPartial", Model);}
+            </div>
+        </div>
+    }
     <div class="row">
-        <div class="col-lg-3">
-            <b>@fullName</b> - @age år<br />
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong">
-                Vänner <span class="badge">@friends.Count</span>
-            </button>
-            @if (!currentUserProfile)
-            {
-                @Html.ActionLink("Lägg till vän", "AddFriend", "User",
-                                 new { userId = profileData.UserId },
-                                 new { @class = "btn btn-default" })
-            }
-            <br />
-            <b>Intressen: <span class="badge">@profileData.Interests.Count</span> </b>
-            <ul></ul>
-        </div>
-        <div class="col-lg-9">
-            <h4>@string.Concat(fullName,"s") vägg:</h4>
-            @Html.TextArea("postText");
-        </div>
+        <hr />
+        <h4>@string.Concat(Model.Profile.FirstName, "s") vägg:</h4>
+        @{Html.RenderAction("_DisplayPostsPartial", "User",
+                      new { userId = Model.Profile.UserId });}
     </div>
 </div>
 
-
-
-<!-- Modal -->
+<!-- Modal: Visar alla vänner vid klick på vänner-knappen -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -69,15 +79,37 @@
                     }
                     else
                     {
-                        <ul>
-                            @foreach (var f in friends)
-                            {
-                                <li>
-                                    @Html.ActionLink(f.FullName, "ViewProfile", "User",
-                                        new { userId = f.UserId })
-                                </li>
-                            }
-                        </ul>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Namn</th>
+                                    <th scope="col">Acceptera/Avböj</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var f in friends)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.ActionLink(f.FullName, "ViewProfile", "User",
+                                                new { userId = f.UserId }, null)
+                                        </td>
+                                        @if (isCurrentUser)
+                                        {
+                                            <td>
+                                                @Html.ActionLink(
+                                                    "Ta bort vän",
+                                                    "remove/removeFriend",
+                                                    "api/friends",
+                                                    new { userId = profileData.UserId },
+                                                    new { @class = "btn btn-danger" })
+                                            </td>
+                                        }
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     }
                 }
             </div>
@@ -88,14 +120,35 @@
     </div>
 </div>
 
+
 @section scripts {
-    <script type="text/javascript">
-        $('#toggle-friends').click(function (ev) {
 
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+            $('#add-item-form').submit(function (ev) {
+                ev.preventDefault();
+
+                var data = {
+                    Author_UserId: $('#author-id').val(),
+                    UserId: $('#to-user-id').val(),
+                    Text: $('#post-text').val().trim()
+                };
+
+                $.ajax({
+                    url: '/api/wall/post/send',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function (response) {
+                        alert(response);
+                    }
+                    });
+            });
         });
 
-        $("#btnAddFriend").click(function () {
-        });
+
     </script>
 }
-
