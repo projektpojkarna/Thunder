@@ -1,18 +1,17 @@
 ﻿@using Microsoft.AspNet.Identity
 @model Thunder.Models.ProfileViewModel
 <hr />
+<div class="info" id="postInfo"></div>
 <label class="text-info">Skriv ett inlägg till @Model.Profile.FirstName:</label>
-<form id="add-item-form" class="form-inline">
+<form id="send-post-form" class="form-inline">
     <input type="hidden" id="to-user-id" value="@Model.Profile.UserId" />
     <input type="hidden" id="author-id" value="@User.Identity.GetUserId()" />
-    <div class="form-group form-horizontal">
-        <div class="input-group form-horizontal">
-            <textarea id="post-text" rows="5" class="form-control" style="resize:none" required></textarea>
+        <div class="input-group">
+            <textarea id="post-text" rows="5" class="form-control" style="resize:none;" required></textarea>
         </div>
         <div class="input-group" style="vertical-align:bottom">
             <button type="submit" class="btn btn-success">
                 Skicka
             </button>
         </div>
-    </div>
 </form>

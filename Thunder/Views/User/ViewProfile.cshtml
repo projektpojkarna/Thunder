@@ -24,22 +24,37 @@
             <div class="row">
                 <b>@fullName</b> - @age år<br />
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalLong">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#showFriendsModal">
                     Vänner <span class="badge">@friends.Count</span>
                 </button>
                 @if (!isCurrentUser && !alreadyFriends)
                 {
-                    @Html.ActionLink("Lägg till vän", "SendFriendRequest", "User",
-                                        new { userId = profileData.UserId },
-                                        new { @class = "btn btn-default" })
+                    @Html.ActionLink("Lägg till vän", "SendFriendRequest", "Friend",
+                         new { userId = profileData.UserId },
+                         new { @class = "btn btn-default" })
                 }
                 else
                 {
-                    <span class="btn btn-success">Ni är vänner <span class="glyphicon glyphicon-heart"></span></span>
+                    if (!isCurrentUser)
+                    {
+                        <span class="btn btn-success">Ni är vänner <span class="glyphicon glyphicon-heart"></span></span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Ändra din profil", "EditProfile", "User", null,
+                                                 new { @class = "btn btn-default" })
+                    }
                 }
                 <br />
-                <b>Intressen: <span class="badge">@profileData.Interests.Count</span> </b>
-                <ul></ul>
+                <ul>
+                    <li>
+                        <b>Ort: </b>@profileData.Location
+                    </li>
+                    <li>
+                        <b>Sysslar med:</b> @profileData.Occupation
+                    </li>
+                </ul>
+
             </div>
         </div>
         <div class="col-lg-8">
@@ -49,106 +64,107 @@
             </div>
         </div>
     </div>
-    @if (!isCurrentUser)
-    {
-        <div class="row">
-            <div class="col-12">
+
+    <div class="row">
+        @if (!isCurrentUser)
+        {
+            <div class="col-lg-offset-4">
                 @{Html.RenderPartial("_NewPostPartial", Model);}
             </div>
-        </div>
-    }
+        }
+    </div>
     <div class="row">
-        <hr />
-        <h4>@string.Concat(Model.Profile.FirstName, "s") vägg:</h4>
-        @{Html.RenderAction("_DisplayPostsPartial", "User",
-                      new { userId = Model.Profile.UserId });}
-    </div>
-</div>
-
-<!-- Modal: Visar alla vänner vid klick på vänner-knappen -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Vänner</h5>
-            </div>
-            <div class="modal-body">
-                @{ if (friends.Count == 0)
-                    {
-                        <p>Här var det tomt...</p>
-                    }
-                    else
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Namn</th>
-                                    <th scope="col">Acceptera/Avböj</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var f in friends)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.ActionLink(f.FullName, "ViewProfile", "User",
-                                                new { userId = f.UserId }, null)
-                                        </td>
-                                        @if (isCurrentUser)
-                                        {
-                                            <td>
-                                                @Html.ActionLink(
-                                                    "Ta bort vän",
-                                                    "remove/removeFriend",
-                                                    "api/friends",
-                                                    new { userId = profileData.UserId },
-                                                    new { @class = "btn btn-danger" })
-                                            </td>
-                                        }
-
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                }
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
-            </div>
+        <div class="col-lg-offset-4">
+            <h4>@string.Concat(Model.Profile.FirstName, "s") vägg:</h4>
+            @{Html.RenderAction("_DisplayPostsPartial", "User",
+                                                new { userId = Model.Profile.UserId });}
         </div>
     </div>
 </div>
+    <!-- Modal: Visar alla vänner vid klick på vänner-knappen -->
+    <div class="modal fade" id="showFriendsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vänner</h5>
+                </div>
+                <div class="modal-body">
+                    @{ if (friends.Count == 0)
+                        {
+                            <p>Här var det tomt...</p>
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Namn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var f in friends)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.ActionLink(f.FullName, "ViewProfile", "User",
+                                                    new { userId = f.UserId }, null)
+                                            </td>
+                                            @if (isCurrentUser)
+                                            {
+                                                <td>
+                                                    @Html.ActionLink(
+                                                        "Ta bort vän",
+                                                        "RemoveFriend",
+                                                        "Friend",
+                                                        new { userId = f.UserId },
+                                                        new { @class = "btn btn-danger", id = "btnRemoveFriend" })
+                                                </td>
+                                            }
 
-
-@section scripts {
-
-    <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
-
-            $('#add-item-form').submit(function (ev) {
-                ev.preventDefault();
-
-                var data = {
-                    Author_UserId: $('#author-id').val(),
-                    UserId: $('#to-user-id').val(),
-                    Text: $('#post-text').val().trim()
-                };
-
-                $.ajax({
-                    url: '/api/wall/post/send',
-                    type: 'POST',
-                    data: data,
-                    success: function (response) {
-                        alert(response);
-                    },
-                    error: function (response) {
-                        alert(response);
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
                     }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section scripts {
+
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+
+                $('#send-post-form').submit(function (ev) {
+                    ev.preventDefault();
+
+                    var data = {
+                        Author_UserId: $('#author-id').val(),
+                        UserId: $('#to-user-id').val(),
+                        Text: $('#post-text').val().trim()
+                    };
+
+                    $.ajax({
+                        url: '/api/wall/post/send',
+                        type: 'POST',
+                        data: data,
+                        success: function (response) {
+                            $('#postInfo').append('<p>' + response + '</p>');
+                            $('#post-text').val('');
+                            window.location.reload();
+                        },
+                        error: function (response) {
+                            $('#postInfo').append('<p style="color:red">' + response + '</p>');
+                            $('#post-text').val('');
+                        }
                     });
+                });
             });
-        });
-
-
-    </script>
-}
+        </script>
+    }

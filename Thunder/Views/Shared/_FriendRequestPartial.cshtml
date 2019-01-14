@@ -14,36 +14,34 @@
     }
 }
 
-    <!-- Modal -->
-    <div class="modal fade" id="friendReqModal" tabindex="-1" role="dialog"
-         aria-labelledby="modalTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Vänförfrågningar</h5>
-                </div>
-                <div class="modal-body">
-                    <table class="table-condensed">
-                        @foreach (var f in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.ActionLink(f.FullName, "ViewProfile", "User",
-                                                                            new { userId = f.UserId }, null)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Acceptera", "add/addfriend", "api/friends", new { userId = f.UserId }, new { @class = "btn btn-default" })
-                                    @Html.ActionLink("Avböj", "/", "api/friends", new { userId = f.UserId }, new { @class = "btn btn-default" })
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="friendReqModal" tabindex="-1" role="dialog"
+     aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Vänförfrågningar</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table-condensed">
+                    @foreach (var f in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(f.FullName, "ViewProfile", "User",
+                                                                        new { userId = f.UserId }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Acceptera", "AcceptFriendRequest", "Friend", new { userId = f.UserId }, new { @class = "btn btn-default", id = "btnAcceptRequest" })
+                                @Html.ActionLink("Avböj", "DenyFriendRequest", "Friend", new { userId = f.UserId }, new { @class = "btn btn-default" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
             </div>
         </div>
     </div>
-
-
+</div>

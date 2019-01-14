@@ -28,32 +28,13 @@ namespace Thunder.Controllers
                     ctx.Posts.Add(p);
                     ctx.SaveChanges();
                 }
-                result = Request.CreateResponse(HttpStatusCode.Created, p);
+                result = Request.CreateResponse(HttpStatusCode.OK, "Meddelande skickat");
             }
             else
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest, "Någonting gick fel, försök igen!");
             }
             return result;
-        }
-
-        [Route("posts/get")]
-        [HttpGet]
-        public IHttpActionResult GetPosts(string userId)
-        {
-            var posts = new PostDbContext().Posts.Where(p => p.UserId == userId);
-            var authors = new ProfileDbContext().Profiles
-                .Where(a => posts.Select(p=> p.Author_UserId).ToList().Contains(a.UserId));
-
-            var result =
-            from post in posts
-            join author in authors on post.Author_UserId equals author.UserId
-            select new {
-                Post = post,
-                Author = string.Concat(author.FirstName, " ", author.LastName)
-            };
-
-            return Ok(new { results = result.ToList() });
         }
     }
 }

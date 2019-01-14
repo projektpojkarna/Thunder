@@ -14,7 +14,7 @@ namespace Thunder.Controllers
     [Authorize] //Alla vyer i denna kontroller kräver inlogg
     public class UserController : Controller
     {
-
+        //Skapar en viewmodel för visning av profilsidan
         private ProfileViewModel GetProfileViewModel(string userId)
         {
             var profileCtx = new ProfileDbContext();
@@ -59,6 +59,7 @@ namespace Thunder.Controllers
             return RedirectToAction("ViewProfile");
         }
 
+        //
         public ActionResult EditProfile()
         {
             var ctx = new ProfileDbContext();
@@ -68,6 +69,7 @@ namespace Thunder.Controllers
             return View(profileViewModel);
         }
 
+        //Ändra profil
         [HttpPost]
         public ActionResult EditProfile(ProfileViewModel p)
         {
@@ -82,6 +84,7 @@ namespace Thunder.Controllers
             return RedirectToAction("ViewProfile");
         }
 
+        //Visa profilsida
         public ActionResult ViewProfile(string userId)
         {
             if (string.IsNullOrEmpty(userId))
@@ -92,26 +95,10 @@ namespace Thunder.Controllers
             return View(profileViewModel);
         }
 
-        [HttpGet]
-        public ActionResult SendFriendRequest(string userId)
-        {
-            if (userId != User.Identity.GetUserId())
-            {
-                var ctx = new FriendRequestDbContext();
-                ctx.Requests.Add(new FriendRequest()
-                {
-                    SenderId = User.Identity.GetUserId(),
-                    RecieverId = userId
-                });
-                ctx.SaveChanges();
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
+        //Returnerar partial View med alla posts som hör till en användares profilsida
         public ActionResult _DisplayPostsPartial(string userId)
         {
-            var posts = new PostDbContext().Posts.Where(p => p.UserId == userId).ToList();
+            var posts = new PostDbContext().Posts.Where(p => p.UserId == userId).OrderByDescending(p=> p.Id).ToList();
             var authors = new ProfileDbContext().Profiles.ToList();
             var postList = new List<PostViewModel>();
 
