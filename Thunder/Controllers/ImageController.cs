@@ -22,6 +22,7 @@ namespace Thunder.Controllers
             return View();
         }
 
+        //Tar in en image model och ger bilden ett unikt namn i databasen och sparar filsökvägen.
         [HttpPost]
         public ActionResult Add(Thunder.Models.User.Image imageModel)
         {
@@ -47,7 +48,7 @@ namespace Thunder.Controllers
 
             ModelState.Clear();
 
-            return RedirectToAction("ViewImage", imageModel);
+            return RedirectToAction("EditProfile", "User");
         }
 
         [HttpGet]
