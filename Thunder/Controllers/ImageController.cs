@@ -47,7 +47,7 @@ namespace Thunder.Controllers
 
             ModelState.Clear();
 
-            return RedirectToAction("ViewImage", imageModel);
+            return RedirectToAction("EditProfile", "User");
         }
 
         [HttpGet]

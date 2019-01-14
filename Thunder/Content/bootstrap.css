@@ -1140,7 +1140,7 @@ img {
 }
 .img-thumbnail {
   display: inline-block;
-  max-width: 100%;
+  max-width: 100%zz;
   height: auto;
   padding: 4px;
   line-height: 1.42857143;
@@ -1154,7 +1154,6 @@ img {
 .img-circle {
   border-radius: 50%;
   max-width:100%;
-  
 }
 hr {
   margin-top: 20px;
