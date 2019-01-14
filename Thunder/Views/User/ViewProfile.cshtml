@@ -46,7 +46,7 @@
                     }
                 }
                 <br />
-                <ul>
+                <ul class=list-unstyled>
                     <li>
                         <b>Ort: </b>@profileData.Location
                     </li>
@@ -70,7 +70,7 @@
             {
                 Html.RenderPartial("_NewPostPartial", Model);
             }
-            else
+            else if(!isCurrentUser && !alreadyFriends)
             {
                 <h4 class="text-danger">Skicka en vänförfrågan för att kunna skriva till @profileData.FirstName!</h4>
             }
