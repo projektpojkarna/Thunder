@@ -1,50 +1,56 @@
 ﻿@model Dictionary<Profile, Thunder.Models.User.Image>
-@using Thunder.Models;
+@using Thunder.Models
 
-@{
-    ViewBag.Title = "Index";
-}
+@if (Model.Count > 0)
+{
+    <h2>Sök efter profiler</h2>
+    <table class="table table-striped table-condensed voc_list">
 
-<h2>Sök efter profiler</h2>
-<table class="table table-striped table-condensed voc_list">
-
-    <thead>
-        <tr>
-            <th>Profilbild</th>
-            <th>Namn</th>
-            <th>Ålder</th>
-            <th>Stad</th>
-            <th>Yrke</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-        @{ var keys = Model.Keys; }
-        @foreach (var item in keys)
-        {
-            var fullName = item.FirstName + " " + item.LastName;
+        <thead>
             <tr>
-                <td style="width:150px" height="100px"> <img class="img-circle" style="max-width:100%; height:100px;"src="@Url.Content(Model[item].ImagePath)" /></td>
-                <td>
-                    @Html.ActionLink(fullName, "ViewProfile/", "User",
-                          new { userId = item.UserId }, null)
-                </td>
-                <td>
-                    @{int age = DateTime.Now.Year - item.BirthDate.Year;}
-                    @Html.DisplayFor(modelItem => age)
-
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelitem => item.Occupation)
-                </td>
+                <th>Profilbild</th>
+                <th>Namn</th>
+                <th>Ålder</th>
+                <th>Stad</th>
+                <th>Yrke</th>
             </tr>
-            }
-          
-</tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @{var keys = Model.Keys;}
+            @foreach (var item in keys)
+            {
+                var fullName = item.FirstName + " " + item.LastName;
+                <tr>
+                    <td style="width:150px" height="100px"> <img class="img-circle" style="max-width:100%; height:100px;" src="@Url.Content(Model[item].ImagePath)" /></td>
+                    <td>
+                        @Html.ActionLink(fullName, "ViewProfile/", "User",
+                        new { userId = item.UserId }, null)
+                    </td>
+                    <td>
+                        @{int age = DateTime.Now.Year - item.BirthDate.Year;}
+                        @Html.DisplayFor(modelItem => age)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelitem => item.Occupation)
+                    </td>
+                </tr>
+             }
+            </tbody>
+        </table>
+    }
+    else
+    {
+          <h2>
+              Ops! Inga träffar hittades. 
+          </h2>
+          <h3>
+              Kolla om namnet är rättstavat.
+          </h3>
+    }
 

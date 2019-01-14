@@ -18,16 +18,18 @@ namespace Thunder.Controllers
             var profiles = new ProfileDbContext().Profiles.ToList();
             var images = new ImageDbContext().Images.ToList();
             var map = new Dictionary<Profile, Image>();
-            foreach (var i in images)
-            {
-                foreach (var p in profiles)
+            
+                foreach (var i in images)
                 {
-                    if (i.UserID == p.UserId)
+                    foreach (var p in profiles)
                     {
-                        map.Add(p, i);
+                        if (i.UserID == p.UserId)
+                        {
+                            map.Add(p, i);
+                        }
                     }
                 }
-            }
+            
             return View(map);
         }
 
