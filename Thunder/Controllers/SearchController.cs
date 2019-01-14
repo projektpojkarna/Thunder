@@ -14,22 +14,28 @@ namespace Thunder.Controllers
 
         public ActionResult Index(string searchString)
         {
-
-            var profiles = new ProfileDbContext().Profiles.Where(s => s.FirstName == searchString || searchString == null).ToList();
-            var images = new ImageDbContext().Images.ToList();
-            var map = new Dictionary<Profile, Image>();
-            foreach (var i in images)
+           
+                var profiles = new ProfileDbContext().Profiles.Where(s => s.FirstName == searchString || s.LastName == searchString || searchString == null).ToList();
+                var images = new ImageDbContext().Images.ToList();
+                var map = new Dictionary<Profile, Image>();
+            if(profiles.Count == 0)
             {
-                foreach (var p in profiles)
+                return View(map);
+            }
+            else
+            { 
+                foreach (var i in images)
                 {
-                    if (i.UserID == p.UserId)
+                    foreach (var p in profiles)
                     {
-                        map.Add(p, i);
+                        if (i.UserID == p.UserId)
+                        {
+                            map.Add(p, i);
+                        }
                     }
                 }
+                return View(map);
             }
-            return View(map);
-         
         }
 
     }

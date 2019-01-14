@@ -13,7 +13,7 @@ namespace Thunder.Models.User
     {   
        [Key]
         public string UserID { get; set; }
-
+        [DisplayName("Bildtext (Frivilligt)")]
         public string Title { get; set; }
         [DisplayName("Ladda Upp Bild")]
         public string ImagePath { get; set; }
