@@ -455,7 +455,6 @@
   <ItemGroup>
     <Folder Include="Views\Friend\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
