@@ -164,7 +164,7 @@ namespace Thunder.Controllers
                 });
 
                 var ImgCtx = new ImageDbContext();
-
+                //Ger användaren en default bild vid skapandet av nytt konto
                 ImgCtx.Images.Add(new Image()
                 {
                     UserID = user.Id,
