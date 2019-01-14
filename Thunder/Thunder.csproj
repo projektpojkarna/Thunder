@@ -243,6 +243,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Thunder-20190103023117.mdf" />
+    <Content Include="App_Data\aspnet-Thunder-20190103023117_log.ldf">
+      <DependentUpon>aspnet-Thunder-20190103023117.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\EntityFramework.dll" />
@@ -451,10 +455,9 @@
     <Content Include="Views\Shared\_FriendRequestPartial.cshtml" />
     <Content Include="Views\User\_NewPostPartial.cshtml" />
     <Content Include="Views\User\_DisplayPostsPartial.cshtml" />
+    <Content Include="Views\Shared\_ShowUsernamePartial.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

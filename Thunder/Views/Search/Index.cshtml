@@ -23,14 +23,12 @@
         @{ var keys = Model.Keys; }
         @foreach (var item in keys)
         {
-        
+            var fullName = item.FirstName + " " + item.LastName;
             <tr>
                 <td style="width:150px" height="100px"> <img class="img-circle" style="max-width:100%; height:100px;"src="@Url.Content(Model[item].ImagePath)" /></td>
                 <td>
-                    @Html.ActionLink(item.FirstName, "ViewProfile/", "User",
-                             new { userId = item.UserId }, null)
-                    @Html.ActionLink(item.LastName, "ViewProfile/", "User",
-                             new { userId = item.UserId }, null)
+                    @Html.ActionLink(fullName, "ViewProfile/", "User",
+                          new { userId = item.UserId }, null)
                 </td>
                 <td>
                     @{int age = DateTime.Now.Year - item.BirthDate.Year;}

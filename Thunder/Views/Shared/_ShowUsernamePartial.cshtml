@@ -4,7 +4,8 @@
 
 @if (Model != null)
 {
+    var fullName = Model.FirstName + " " + Model.LastName;
 
-@Html.ActionLink(Model.FirstName + " " + Model.LastName, "ViewProfile", "User")
+@Html.ActionLink(fullName, "ViewProfile", "User")
 
 }
