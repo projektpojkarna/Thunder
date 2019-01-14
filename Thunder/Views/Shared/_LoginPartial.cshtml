@@ -2,7 +2,7 @@
 @if (Request.IsAuthenticated)
 {
 
-    <div class="navbar-right" style="margin-top:15px;">
+    <div class="navbar-header" style="margin-top:15px;">
         @using (Html.BeginForm("Index", "Search", FormMethod.Get))
         {
             <ul class="nav navbar-nav">
@@ -11,7 +11,6 @@
             </ul>
         }
     </div> 
-   
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
